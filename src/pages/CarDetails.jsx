@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
+import StarRating from './StarRating'
 
 const CarDetails = () => {
-  return (
-    <div>
-      CarDetails
-    </div>
-  )
-}
+return(
+  <h1>CarDetails</h1>
+  );
+};
+
 
 export default CarDetails
