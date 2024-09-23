@@ -1,0 +1,103 @@
+
+.terms-page {
+    min-height: 100vh;
+    background-color: #f7fafc; 
+  }
+  
+  .terms-content {
+    padding: 2.5rem;
+    padding-left: 5rem;
+    background-color: #edf2f7; 
+  }
+  
+  .terms-header {
+    padding-left: 0.5rem;
+    border-left: 8px solid #4800ff; 
+  }
+  
+  .terms-title {
+    font-size: 2.25rem; 
+    padding: 0.5rem;
+    font-style: italic;
+  }
+  
+  .terms-subtitle {
+    font-size: 1.5rem; 
+    font-weight: bold;
+    padding: 0.5rem;
+  }
+  
+  .terms-description {
+    padding: 0.5rem;
+  }
+  
+  .terms-main {
+    display: flex;
+    margin: 2.5rem;
+    width: 100%;
+  }
+  
+  .sidebar {
+    width: 33.333333%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+  
+  .sidebar-nav {
+    position: sticky;
+    margin-top: 2.5rem;
+    margin-left: 1rem;
+  }
+  
+  .sidebar-list {
+    list-style-type: none;
+    padding: 0;
+    border: 1px solid #e2e8f0; 
+    background-color: #edf2f7; 
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .sidebar-item {
+    border-bottom: 1px solid #e2e8f0; 
+  }
+  
+  .sidebar-link {
+    color: #4a5568; 
+    display: block;
+    padding: 0.5rem 0;
+  }
+  
+  .main-content {
+    width: 66.666667%;
+    padding: 2rem;
+  }
+  
+  .main-header {
+    margin-bottom: 2rem;
+  }
+  
+  .main-title {
+    font-size: 1.875rem; 
+    font-weight: bold;
+    color: #2d3748; 
+  }
+  
+  
+  .section-title {
+    font-size: 1.5rem; 
+    font-weight: 600; 
+    color: #4a5568; 
+  }
+  
+  .section-text {
+    color: #718096;
+    margin-top: 0.5rem;
+  }
+  
+  section {
+    padding: 1rem ;
+  }

@@ -7,6 +7,7 @@ import CarDetails from '../pages/CarDetails';
 import Blog from '../pages/Blog';
 import BlogDetails from '../pages/BlogDetails';
 import NotFound from '../pages/NotFound';
+import TermsPage from '../pages/TermsPage';
 
 const Routers = () => {
   return (
@@ -19,6 +20,7 @@ const Routers = () => {
       <Route path='/blogs' element={<Blog />} />
       <Route path='/blogs/:slug' element={<BlogDetails />} />
       <Route path='*' element={<NotFound />} />
+      <Route path='termspage' element={<TermsPage />} />
     </Routes>
   );
 };
