@@ -1,0 +1,95 @@
+
+.kanban-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding: 20px;
+  }
+  
+  .add-vehicle-form {
+    display: flex;
+    gap: 10px; 
+    margin-bottom: 20px; 
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
+  }
+  
+  .add-vehicle-form input,
+  .add-vehicle-form select {
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+  }
+  
+  .add-vehicle-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px; 
+    background-color: #007bff;
+    color: white; 
+    cursor: pointer; 
+  }
+  
+  .add-vehicle-form button:hover {
+    background-color: #0056b3; 
+  }
+  
+  .kanban-columns {
+    display: flex; 
+    justify-content: space-between; 
+    width: 100%; 
+  }
+  
+  .kanban-column {
+    background-color: #e0f7fa;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%; 
+    min-height: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+  }
+  
+  .kanban-column:hover {
+    background-color: #b3e5fc;
+  }
+  
+  .kanban-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0277bd;
+    margin-bottom: 20px;
+  }
+  
+  .kanban-card {
+    background-color: #bbdefb;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .kanban-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .vehicle-info {
+    font-size: 1.2rem;
+    color: #01579b;
+  }
+  
+  .vehicle-plate {
+    font-size: 1rem;
+    color: #0288d1;
+    margin-top: 5px;
+  }
+  
+  .droppable-placeholder {
+    height: 50px;
+  }
+  
