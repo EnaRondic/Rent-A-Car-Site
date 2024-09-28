@@ -1,40 +1,20 @@
-import React, { useRef} from "react";
+import React, { useRef } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/header.css";
 
 const navLInks = [
-  {
-    path: "/home",
-    display: "Home",
-  },
-  {
-    path: "/about",
-    display: "About",
-  },
-  {
-    path: "/cars",
-    display: "Cars",
-  },
-
-  {
-    path: "/blogs",
-    display: "Blog",
-  },
-  {
-    path: "/contact",
-    display: "Contact",
-  },
-  {
-    path: "/termspage",
-    display: "Terms",
-  },
+  { path: "/home", display: "Home" },
+  { path: "/about", display: "About" },
+  { path: "/cars", display: "Cars" },
+  { path: "/blogs", display: "Blog" },
+  { path: "/contact", display: "Contact" },
+  { path: "/termspage", display: "Terms" },
 ];
 
 const Header = () => {
-
-  const menuRef = useRef(null)
-  const toggleMenu = () => menuRef.current.classList.toggle('menu__active')
+  const menuRef = useRef(null);
+  const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
   return (
     <header className="header">
@@ -46,19 +26,19 @@ const Header = () => {
               <div className="header__top__left">
                 <span>Need Help?</span>
                 <span className="header__top__help">
-                  <i class="ri-phone-fill"></i> +38269789564
+                  <i className="ri-phone-fill"></i> +38269789564
                 </span>
               </div>
             </Col>
 
             <Col lg="6" md="6" sm="6">
               <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                <Link to="#" className=" d-flex align-items-center gap-1">
-                  <i class="ri-login-circle-line"></i> Login{" "}
+                <Link to="/login" className="d-flex align-items-center gap-1">
+                  <i className="ri-login-circle-line"></i> Login
                 </Link>
 
-                <Link to="#" className=" d-flex align-items-center gap-1">
-                  <i class="ri-user-line"></i> Register{" "}
+                <Link to="/register" className="d-flex align-items-center gap-1">
+                  <i className="ri-user-line"></i> Register
                 </Link>
               </div>
             </Col>
@@ -74,7 +54,7 @@ const Header = () => {
               <div className="logo">
                 <h1>
                   <Link to="/home" className="d-flex align-items-center gap-1">
-                    <i class="ri-car-line"></i>
+                    <i className="ri-car-line"></i>
                     <span>
                       Rent Car <br /> Service
                     </span>
@@ -86,7 +66,7 @@ const Header = () => {
             <Col lg="3" md="3" sm="4">
               <div className="header__location d-flex align-items-center gap-2">
                 <span>
-                  <i class="ri-earth-line"></i>
+                  <i className="ri-earth-line"></i>
                 </span>
                 <div className="header__location-content">
                   <h4>Montenegro</h4>
@@ -98,7 +78,7 @@ const Header = () => {
             <Col lg="3" md="3" sm="4">
               <div className="header__location d-flex align-items-center gap-2">
                 <span>
-                  <i class="ri-time-line"></i>
+                  <i className="ri-time-line"></i>
                 </span>
                 <div className="header__location-content">
                   <h4>Sunday to Friday</h4>
@@ -110,7 +90,7 @@ const Header = () => {
             <Col lg="2" md="3" sm="0" className="d-flex align-items-center justify-content-end">
               <button className="header__btn btn">
                 <Link to="/contact">
-                  <i class="ri-phone-line"></i> Request a call
+                  <i className="ri-phone-line"></i> Request a call
                 </Link>
               </button>
             </Col>
@@ -119,12 +99,11 @@ const Header = () => {
       </div>
 
       {/* main navigation */}
-
       <div className="main__navbar">
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
             <span className="monile__menu">
-              <i class="ri-menu-line"onClick={toggleMenu}></i>
+              <i className="ri-menu-line" onClick={toggleMenu}></i>
             </span>
 
             <div className="navigation" ref={menuRef} onClick={toggleMenu}>
@@ -147,7 +126,7 @@ const Header = () => {
               <div className="search__box">
                 <input type="text" placeholder="Search" />
                 <span>
-                  <i class="ri-search-line"></i>
+                  <i className="ri-search-line"></i>
                 </span>
               </div>
             </div>
