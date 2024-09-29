@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
 import "../../styles/header.css";
 
-const navLInks = [
+const navLinks = [
   { path: "/home", display: "Home" },
   { path: "/about", display: "About" },
   { path: "/cars", display: "Cars" },
@@ -14,11 +15,23 @@ const navLInks = [
 
 const Header = () => {
   const menuRef = useRef(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
+
+  const handleLogout = () => {
+    // Logika za logout (npr. brisanje tokena)
+    navigate("/login"); // Redirekcija na login stranicu
+  };
+
+  const toggleDropdown = (event) => {
+    event.stopPropagation(); // Sprečava zatvaranje menija kada se klikne na ikonu
+    setDropdownOpen(!dropdownOpen);
+  };
 
   return (
     <header className="header">
-      {/*top header */}
       <div className="header__top">
         <Container>
           <Row>
@@ -32,14 +45,29 @@ const Header = () => {
             </Col>
 
             <Col lg="6" md="6" sm="6">
-              <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+              <div className="header__top__right">
                 <Link to="/login" className="d-flex align-items-center gap-1">
                   <i className="ri-login-circle-line"></i> Login
                 </Link>
 
-                <Link to="/register" className="d-flex align-items-center gap-1">
+                <Link
+                  to="/register"
+                  className="d-flex align-items-center gap-1"
+                >
                   <i className="ri-user-line"></i> Register
                 </Link>
+
+                <div className="user-icon" onClick={toggleDropdown}>
+                  <FaUserCircle size={24} />
+                  {dropdownOpen && (
+                    <div className={`dropdown-menu ${dropdownOpen ? "active" : ""}`}>
+                      <Link to="/profile" onClick={toggleDropdown}>
+                        View Profile
+                      </Link>
+                      <button onClick={handleLogout}>Logout</button>
+                    </div>
+                  )}
+                </div>
               </div>
             </Col>
           </Row>
@@ -87,7 +115,12 @@ const Header = () => {
               </div>
             </Col>
 
-            <Col lg="2" md="3" sm="0" className="d-flex align-items-center justify-content-end">
+            <Col
+              lg="2"
+              md="3"
+              sm="0"
+              className="d-flex align-items-center justify-content-end"
+            >
               <button className="header__btn btn">
                 <Link to="/contact">
                   <i className="ri-phone-line"></i> Request a call
@@ -102,13 +135,13 @@ const Header = () => {
       <div className="main__navbar">
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
-            <span className="monile__menu">
+            <span className="mobile__menu">
               <i className="ri-menu-line" onClick={toggleMenu}></i>
             </span>
 
             <div className="navigation" ref={menuRef} onClick={toggleMenu}>
               <div className="menu">
-                {navLInks.map((item, index) => (
+                {navLinks.map((item, index) => (
                   <NavLink
                     to={item.path}
                     className={(navClass) =>

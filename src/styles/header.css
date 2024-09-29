@@ -204,3 +204,45 @@
       display: block;
     }
   }
+
+  .header__top__right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Razmak između elemenata */
+    justify-content: flex-end; 
+  }
+  
+  .user-icon {
+    cursor: pointer;
+    position: relative; /* Potrebno za dropdown */
+  }
+  
+  /* Dropdown meni stil */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Pozicija ispod ikone korisnika */
+    right: 0; /* Poravnanje na desnu stranu */
+    background: #fff;
+    color: #000d6b;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Osiguraj da bude iznad ostalih elemenata */
+    display: flex;
+    flex-direction: column; /* Opcije su vertikalno poređane */
+  }
+  
+  .dropdown-menu a,
+  .dropdown-menu button {
+    padding: 10px;
+    text-align: left;
+    border: none;
+    background: none; /* Bez pozadine za dugmadi */
+    cursor: pointer; /* Ruka pokazivač na dugmadi */
+  }
+  
+  .dropdown-menu a:hover,
+  .dropdown-menu button:hover {
+    background-color: #f0f0f0; /* Pozadinska boja na hover */
+  }
+  
