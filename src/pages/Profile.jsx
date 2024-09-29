@@ -9,7 +9,6 @@ const Profile = () => {
         <p><strong>Name:</strong> </p>
         <p><strong>Email:</strong> </p>
         <p><strong>Phone:</strong> </p>
-        {/* Dodajte još polja prema potrebi */}
       </div>
     </Container>
   );

@@ -1,12 +1,41 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"; // Ne zaboravi da importuješ stilove
+import "react-datepicker/dist/react-datepicker.css"; 
 import "../../styles/find-car-form.css";
-import { Form, FormGroup } from "reactstrap";
+import { Form, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const FindCarForm = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const formatDates = () => {
+    if (startDate && endDate) {
+      const start = startDate.toLocaleDateString("sr-RS", {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }); 
+      const end = endDate.toLocaleDateString("sr-RS", {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }); 
+      return `${start}-${end}`;
+    }
+    return ''; 
+  };
+
+  const handleDateChange = (date) => {
+    if (!startDate) {
+      setStartDate(date);
+    } else if (date > startDate) {
+      setEndDate(date);
+      setModalOpen(false); 
+    } else {
+      setStartDate(date); 
+    }
+  };
 
   return (
     <Form className="form">
@@ -21,28 +50,16 @@ const FindCarForm = () => {
         </FormGroup>
 
         <FormGroup className="form__group">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            selectsStart
-            startDate={startDate}
-            endDate={endDate}
-            placeholderText="Pick-up date"
-            dateFormat="yyyy/MM/dd"
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            selectsEnd
-            startDate={startDate}
-            endDate={endDate}
-            minDate={startDate}
-            placeholderText="Return date"
-            dateFormat="yyyy/MM/dd"
+          <input
+            type="text"
+            value={formatDates()}
+            placeholder="Pick-up - Return"
+            readOnly
+            onClick={() => setModalOpen(true)} 
+            className="date-input" 
           />
         </FormGroup>
 
-        
         <FormGroup className="select__group">
           <select>
             <option value="ac">AC Car</option>
@@ -54,6 +71,26 @@ const FindCarForm = () => {
           <button className="btn find__car-btn">Find Car</button>
         </FormGroup>
       </div>
+
+      <Modal isOpen={modalOpen} toggle={() => setModalOpen(false)}>
+        <ModalHeader toggle={() => setModalOpen(false)}>Izaberi datume</ModalHeader>
+        <ModalBody>
+          <DatePicker
+            selected={startDate || endDate} 
+            onChange={handleDateChange}
+            selectsRange={!!(startDate && endDate)} 
+            startDate={startDate}
+            endDate={endDate}
+            minDate={new Date()} 
+            placeholderText="Izaberi datum"
+            dateFormat="dd.MM.yyyy"
+            inline
+          />
+        </ModalBody>
+        <ModalFooter>
+          <button className="btn btn-secondary" onClick={() => setModalOpen(false)}>Zatvori</button>
+        </ModalFooter>
+      </Modal>
     </Form>
   );
 };
