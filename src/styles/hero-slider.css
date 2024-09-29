@@ -4,24 +4,24 @@
 }
 
 .slider__item-01 {
-  background: linear-gradient(rgba(0, 119, 255, 0.5), rgba(52, 187, 255, 0.5)),
-    url("../assets/all-images/slider-img/slider-1.jpg");
+  background: linear-gradient(rgba(0, 119, 255, 0.2), rgba(52, 187, 255, 0.3)),
+    url("../assets/all-images/slider-img/mercedes.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .slider__item-02 {
-  background: linear-gradient(rgba(0, 119, 255, 0.5), rgba(52, 187, 255, 0.5)),
-    url("../assets/all-images/slider-img/slider-2.jpg");
+  background: linear-gradient(rgba(0, 119, 255, 0.2), rgba(52, 187, 255, 0.3)),
+    url("../assets/all-images/slider-img/bmw.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .slider__item-03 {
-  background: linear-gradient(rgba(0, 119, 255, 0.5), rgba(52, 187, 255, 0.5)),
-    url("../assets/all-images/slider-img/slider-3.jpg");
+  background: linear-gradient(rgba(0, 119, 255, 0.2), rgba(52, 187, 255, 0.3)),
+    url("../assets/all-images/slider-img/audi.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -1,7 +1,8 @@
 .header__top {
-  padding: 10px 0px;
+  padding: 10px 0;
   background: #00bcd4; 
   color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Dodaj senku */
 }
 
 .header__top__left {
@@ -12,6 +13,7 @@
 
 .header__top__left span {
   font-size: 0.9rem;
+  font-weight: 500; /* Dodaj težinu fonta */
 }
 
 .header__top__help {
@@ -32,35 +34,47 @@
   text-decoration: none;
   color: #fff;
   font-size: 0.9rem;
+  transition: color 0.3s; /* Dodaj tranziciju */
 }
 
 .header__top__right a:hover {
-  color: #fff;
+  color: #ffeb3b; /* Promeni boju prilikom hovera */
 }
 
 /* middle header style */
-
 .header__middle {
-  padding: 20px 0px;
+  padding: 20px 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Dodaj donju granicu */
 }
 
 .logo h1 a span {
   font-size: 1.5rem;
-}
-
-.logo h1 a i {
-  font-size: 2.2rem;
+  font-weight: 700; /* Dodaj težinu fonta */
 }
 
 .logo h1 a {
   text-decoration: none;
   color: #00bcd4; 
   font-weight: 700;
+  transition: transform 0.3s; /* Dodaj tranziciju */
 }
 
-.logo h1 {
-  line-height: 1.5rem;
+.logo h1 a:hover {
+  transform: scale(1.05); /* Efekat uvećanja prilikom hovera */
 }
+
+.logo-image {
+  width: 100px; /* Podesi širinu po potrebi */
+  height: auto; /* Održava proporcije slike */
+  margin-right: 10px; /* Razmak između loga i teksta */
+}
+
+.logo-text {
+  text-align: center; /* Centriranje teksta */
+  display: block; /* Omogućava text-align da funkcioniše */
+  margin-top: 5px; /* Razmak između "Rent a Car" i "Go" */
+}
+
 
 .header__location span i {
   font-size: 2.2rem;
@@ -102,7 +116,7 @@
 /* main navbar style */
 
 .main__navbar {
-  padding: 15px 0px;
+  padding: 15px 0;
   background: #00bcd4; 
 }
 
@@ -138,14 +152,14 @@
   display: flex;
   align-items: center;
   border-radius: 50px;
-  background: rgba(0, 188, 212, 0.8); 
+  background: #fff;
 }
 
 .search__box input {
   background: transparent;
   border: none;
   outline: none;
-  color: #fff;
+  color: #080808;
   cursor: pointer;
 }
 
@@ -154,7 +168,7 @@
 }
 
 .search__box span i {
-  color: rgba(255, 255, 255, 0.555);
+  color: rgba(0, 0, 0, 0.555);
   cursor: pointer;
 }
 
@@ -203,48 +217,51 @@
 
   .menu__active {
       display: block;
-    }
   }
+}
 
-  .header__top__right {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem; 
-    justify-content: flex-end; 
-  }
-  
-  .user-icon {
-    cursor: pointer;
-    position: relative; 
-  }
-  
-  /* Dropdown meni stil */
-  .dropdown-menu {
-    position: absolute;
-    top: 100%; 
-    right: 0; 
-    background: #fff;
-    color: #000d6b;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000; 
-    display: flex;
-    flex-direction: column; 
-  }
-  
-  .dropdown-menu a,
-  .dropdown-menu button {
-    padding: 10px;
-    text-align: left;
-    border: none;
-    background: none; 
-    cursor: pointer; 
-  }
-  
-  .dropdown-menu a:hover,
-  .dropdown-menu button:hover {
-    background-color: #f0f0f0; 
-  }
-  
+.header__top__right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; 
+  justify-content: flex-end; 
+}
 
+.user-icon {
+  cursor: pointer;
+  position: relative; 
+}
+
+/* Dropdown meni stil */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; 
+  right: 0; 
+  background: #fff;
+  color: #000d6b;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000; 
+  display: flex;
+  flex-direction: column; 
+  display: none;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  padding: 10px;
+  text-align: left;
+  border: none;
+  color: #000d6b;
+  cursor: pointer; 
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: #d1c4c4; 
+}
+
+.dropdown-menu.active {
+  display: flex; 
+}

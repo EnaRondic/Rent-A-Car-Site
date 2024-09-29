@@ -3,6 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import "../../styles/header.css";
+import logo from "../../assets/all-images/logo.png"; // Uvezi svoj logo
 
 const navLinks = [
   { path: "/home", display: "Home" },
@@ -22,11 +23,11 @@ const Header = () => {
 
   const handleLogout = () => {
     // Logika za logout (npr. brisanje tokena)
-    navigate("/login"); // Redirekcija na login stranicu
+    navigate("/login");
   };
 
   const toggleDropdown = (event) => {
-    event.stopPropagation(); // Sprečava zatvaranje menija kada se klikne na ikonu
+    event.stopPropagation();
     setDropdownOpen(!dropdownOpen);
   };
 
@@ -60,10 +61,12 @@ const Header = () => {
                 <div className="user-icon" onClick={toggleDropdown}>
                   <FaUserCircle size={24} />
                   {dropdownOpen && (
-                    <div className={`dropdown-menu ${dropdownOpen ? "active" : ""}`}>
-                      <Link to="/profile" onClick={toggleDropdown}>
-                        View Profile
-                      </Link>
+                    <div
+                      className={`dropdown-menu ${
+                        dropdownOpen ? "active" : ""
+                      }`}
+                    >
+                      <Link to="/profile">View Profile</Link>
                       <button onClick={handleLogout}>Logout</button>
                     </div>
                   )}
@@ -82,9 +85,9 @@ const Header = () => {
               <div className="logo">
                 <h1>
                   <Link to="/home" className="d-flex align-items-center gap-1">
-                    <i className="ri-car-line"></i>
-                    <span>
-                      Rent Car <br /> Service
+                    <img src={logo} alt="Logo" className="logo-image" />
+                    <span className="logo-text">
+                      Rent a Car <br /> Go
                     </span>
                   </Link>
                 </h1>
