@@ -15,25 +15,27 @@ const FindCarForm = () => {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric'
-      }); 
+      });
       const end = endDate.toLocaleDateString("sr-RS", {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric'
-      }); 
+      });
       return `${start}-${end}`;
     }
     return ''; 
   };
 
-  const handleDateChange = (date) => {
-    if (!startDate) {
-      setStartDate(date);
-    } else if (date > startDate) {
-      setEndDate(date);
-      setModalOpen(false); 
-    } else {
-      setStartDate(date); 
+  const handleDateChange = (dates) => {
+    const [start, end] = dates;
+
+   
+    if (start && !end) {
+      setStartDate(start);
+    } else if (start && end) {
+      setStartDate(start);
+      setEndDate(end);
+      setModalOpen(false);
     }
   };
 
@@ -78,7 +80,7 @@ const FindCarForm = () => {
           <DatePicker
             selected={startDate || endDate} 
             onChange={handleDateChange}
-            selectsRange={!!(startDate && endDate)} 
+            selectsRange={true}
             startDate={startDate}
             endDate={endDate}
             minDate={new Date()} 
