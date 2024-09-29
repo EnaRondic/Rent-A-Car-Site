@@ -11,6 +11,7 @@ import TermsPage from '../pages/TermsPage';
 import Contact from '../pages/Contact';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import Profile from '../pages/Profile';
 
 
 
@@ -30,6 +31,7 @@ const Routers = () => {
       <Route path='*' element={<NotFound />} />
       <Route path='/contact' element={<Contact />} />
       <Route path='termspage' element={<TermsPage />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 };
