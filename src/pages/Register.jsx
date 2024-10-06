@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/all-images/background.jpg'; 
 import '../styles/login.css'; 
@@ -12,7 +13,7 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -20,9 +21,26 @@ const Register = () => {
       return;
     }
 
-    console.log('Registracija uspešna za:', email);
-    setErrorMessage('');
-    navigate('/login'); 
+    try {
+      const response = await axios(  {
+        method: "POST",
+        url: `http://localhost:8000/api/register`,
+        headers: {},
+        data: {
+               "name": name,
+               "email": email,
+               "password": password,
+               "password_confirmation": confirmPassword,
+         },
+    });
+
+      if (response.status === 201) {
+        setErrorMessage('');
+        navigate('/login'); 
+      }
+    } catch (error) {
+      setErrorMessage(`Registration failed. ${error.errors}`);
+    }
   };
 
   return (
@@ -43,20 +61,10 @@ const Register = () => {
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="surname">Surname</label>
-            <input
-              type="text"
-              id="surname"
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
-              required
-              className="form-input"
-            />
-          </div>
+          
 
           <div className="form-group">
-            <label htmlFor="email">Email adress</label>
+            <label htmlFor="email">Email address</label>
             <input
               type="email"
               id="email"
