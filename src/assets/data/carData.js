@@ -1,18 +1,18 @@
-import img01 from "../all-images/cars-img/nissan-offer.png";
-import img02 from "../all-images/cars-img/offer-toyota.png";
-import img03 from "../all-images/cars-img/bmw-offer.png";
-import img04 from "../all-images/cars-img/nissan-offer.png";
-import img05 from "../all-images/cars-img/offer-toyota.png";
-import img06 from "../all-images/cars-img/mercedes-offer.png";
+import img01 from "../all-images/cars-img/golf6.jpg";
+import img02 from "../all-images/cars-img/passat.jpg";
+import img03 from "../all-images/cars-img/2024_Yaris_GRSport_036.jpg";
+import img04 from "../all-images/cars-img/Nissan Qashqai N-Design_012-source (1).jpg";
+import img05 from "../all-images/cars-img/Porsche-Cayenne-S-2023-wallpaper-2133x1200-cropped.jpeg";
+import img06 from "../all-images/cars-img/Mercedes-Benz-C-Class-2022-gearbox-faulty-1024x576.jpg";
 import img07 from "../all-images/cars-img/toyota-offer-2.png";
 import img08 from "../all-images/cars-img/mercedes-offer.png";
 
 const carData = [
   {
     id: 1,
-    brand: "Tesla",
+    brand: "Golf",
     rating: 112,
-    carName: "Tesla Malibu",
+    carName: "Golf 6",
     imgUrl: img01,
     model: "Model 3",
     price: 50,
@@ -26,9 +26,9 @@ const carData = [
 
   {
     id: 2,
-    brand: "Toyota",
+    brand: "Volkswagen",
     rating: 102,
-    carName: "Toyota Aventador",
+    carName: "Volkswagen Passat",
     imgUrl: img02,
     model: "Model-2022",
     price: 50,
@@ -42,9 +42,9 @@ const carData = [
 
   {
     id: 3,
-    brand: "BMW",
+    brand: "Toyota",
     rating: 132,
-    carName: "BMW X3",
+    carName: "Toyota Yaris",
     imgUrl: img03,
     model: "Model-2022",
     price: 65,
@@ -60,7 +60,7 @@ const carData = [
     id: 4,
     brand: "Nissan",
     rating: 102,
-    carName: "Nissan Mercielago",
+    carName: "Nissan Qashqai",
     imgUrl: img04,
     model: "Model-2022",
     price: 70,
@@ -74,9 +74,9 @@ const carData = [
 
   {
     id: 5,
-    brand: "Ferrari",
+    brand: "Porsche",
     rating: 94,
-    carName: "Ferrari Camry",
+    carName: "Porsche Cayenne",
     imgUrl: img05,
     model: "Model-2022",
     price: 45,

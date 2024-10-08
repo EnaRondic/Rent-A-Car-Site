@@ -22,7 +22,6 @@ const Header = () => {
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
   const handleLogout = () => {
-    // Logika za logout (npr. brisanje tokena)
     navigate("/login");
   };
 

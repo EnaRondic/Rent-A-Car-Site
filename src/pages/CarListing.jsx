@@ -17,7 +17,7 @@ const CarListing = () => {
 
   return (
     <Helmet title="Cars">
-      <CommonSection title="Car Listing" />
+      <CommonSection title="All Cars" />
       <section>
         <Container>
           <Row>
