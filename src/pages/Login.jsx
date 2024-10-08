@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/all-images/background.jpg';
 import '../styles/login.css';
@@ -9,15 +10,28 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (email === 'admin@example.com' && password === 'admin') {
-      console.log('Login successful');
-      setErrorMessage('');
-      navigate('/home'); 
-    } else {
-      setErrorMessage('Invalid email or password');
+    try {
+      const response = await axios(  {
+        method: "POST",
+        url: `http://localhost:8000/api/login`,
+        headers: {},
+        data: {
+               "email": email,
+               "password": password,
+         },
+      });
+
+      if (response.status === 200) {
+        const data = response.data;
+        localStorage.setItem('authToken', data.access_token);
+        setErrorMessage('');
+        navigate('/home'); 
+      }
+    } catch (error) {
+      setErrorMessage('Invalid email or password. Please try again.');
     }
   };
 
