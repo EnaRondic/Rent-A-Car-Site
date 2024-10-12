@@ -12,6 +12,8 @@ import Contact from '../pages/Contact';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Profile from '../pages/Profile';
+import MyReservations from '../pages/MyReservations';
+import KanbanBoard from '../pages/KanbanBoard';
 
 
 
@@ -32,6 +34,8 @@ const Routers = () => {
       <Route path='/contact' element={<Contact />} />
       <Route path='termspage' element={<TermsPage />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/my-reservations" element={<MyReservations />} />
+      <Route path="/kanban" element={<KanbanBoard />} />
     </Routes>
   );
 };

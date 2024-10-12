@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import "../../styles/header.css";
-import logo from "../../assets/all-images/logo.png"; // Uvezi svoj logo
+import logo from "../../assets/all-images/logo.png"; 
 
 const navLinks = [
   { path: "/home", display: "Home" },
@@ -12,6 +12,8 @@ const navLinks = [
   { path: "/blogs", display: "Blog" },
   { path: "/contact", display: "Contact" },
   { path: "/termspage", display: "Terms" },
+  {path: "/my-reservations", display: "My reservations"},
+  { path: "/kanban", display: "Kanban" },
 ];
 
 const Header = () => {
@@ -133,7 +135,7 @@ const Header = () => {
         </Container>
       </div>
 
-      {/* main navigation */}
+      {/*main header*/}
       <div className="main__navbar">
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">

@@ -1,38 +1,47 @@
 .kanban-container {
-  display: flex;
+  display: flex; 
   flex-direction: column; 
   align-items: center; 
-  padding: 20px;
+  justify-content: center; 
+  flex-wrap: nowrap; 
+  padding: 20px; 
+  background-color: #ffffff; 
+  border-radius: 8px; 
+  max-width: 1000px; 
+  margin: auto; 
 }
 
 .add-vehicle-form {
   display: flex;
+  justify-content: center; 
   gap: 10px; 
   margin-bottom: 20px; 
   padding: 10px;
-  border: 1px solid #90e0ef; 
-  border-radius: 5px; 
-  background-color: #f0fdfa; 
+  border: 1px solid #00bcd4; 
+  border-radius: 8px; 
+  background-color: #b2ebf2; 
+  width: calc(100% - 40px); 
 }
 
 .add-vehicle-form input,
 .add-vehicle-form select {
   padding: 10px;
-  border: 1px solid #90e0ef; 
+  border: 1px solid #00bcd4; 
   border-radius: 5px; 
+  flex-grow: 1; 
 }
 
 .add-vehicle-form button {
   padding: 10px 15px;
   border: none;
   border-radius: 5px; 
-  background-color: #00bcd4; 
+  background-color: #0097a7; 
   color: white; 
   cursor: pointer; 
 }
 
 .add-vehicle-form button:hover {
-  background-color: #00838f; 
+  background-color: #00796b; 
 }
 
 .kanban-columns {
@@ -42,18 +51,14 @@
 }
 
 .kanban-column {
-  background-color: #e0f2f1; 
-  border-radius: 10px;
-  padding: 20px;
-  width: 30%; 
-  min-height: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
   margin: 0 10px;
-}
-
-.kanban-column:hover {
-  background-color: #b2dfdb; 
+  width: 400px; 
+  border: 1px solid #80deea; 
+  border-radius: 8px; 
+  background-color: #e1fdff; 
+  padding: 10px; 
+  height: auto; /* Omogućava koloni da raste prema sadržaju */
+  overflow-y: auto; /* Dodaje scrollbar ako je sadržaj veći od vidljivog dela */
 }
 
 .kanban-title {
@@ -61,33 +66,29 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: #00695c; 
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .kanban-card {
-  background-color: #bbdefb; 
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  background-color: #bdeaff;
+  padding: 15px; 
+  margin-bottom: 10px;
+  border-radius: 15px; 
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  min-height: 100px; 
 }
 
 .kanban-card:hover {
-  transform: scale(1.05);
+  background-color: #b3e5fc; 
 }
 
 .vehicle-info {
-  font-size: 1.2rem;
-  color: #01579b; 
+  margin: 0;
 }
 
 .vehicle-plate {
-  font-size: 1rem;
-  color: #0288d1; 
-  margin-top: 5px;
-}
-
-.droppable-placeholder {
-  height: 50px;
+  margin: 0;
+  font-size: 0.9em;
+  color: #666;
 }

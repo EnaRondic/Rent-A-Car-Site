@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import StarRating from "./StarRating";
 import { Container, Row, Col } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
@@ -55,12 +54,6 @@ const CarListing = () => {
           </Row>
         </Container>
       </section>
-      <div className="car-details">
-        <h1>Car Model</h1>
-        {/* Other car details */}
-        <StarRating rating={rating} onRatingChange={handleRatingChange} />
-        <p>Your rating: {rating}</p>
-      </div>
     </Helmet>
   );
 };

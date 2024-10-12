@@ -9,7 +9,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch('https://api.example.com/user/profile'); 
+        const response = await fetch('http://localhost:8000/api/login'); 
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
