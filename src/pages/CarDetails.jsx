@@ -43,7 +43,7 @@ const CarDetails = () => {
     const reservationData = { 
       ...formData, 
       carName: singleCarItem.carName, 
-      imgUrl: singleCarItem.imgUrl // Store the image URL
+      imgUrl: singleCarItem.imgUrl 
     };
     
     setMyReservations(prev => [...prev, reservationData]);
