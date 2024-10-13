@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
+import logo from "../../assets/all-images/logo.png";
 import "../../styles/footer.css";
 
 const quickLinks = [
@@ -8,12 +9,10 @@ const quickLinks = [
     path: "/about",
     display: "About",
   },
-
   {
     path: "#",
     display: "Privacy Policy",
   },
-
   {
     path: "/cars",
     display: "All Cars",
@@ -22,7 +21,6 @@ const quickLinks = [
     path: "/blogs",
     display: "Blog",
   },
-
   {
     path: "/contact",
     display: "Contact",
@@ -39,8 +37,8 @@ const Footer = () => {
           <Col lg="4" md="4" sm="12">
             <div className="logo footer__logo">
               <h1>
-                <Link to="/home" className=" d-flex align-items-center gap-2">
-                  <i class="ri-car-line"></i>
+                <Link to="/home" className="d-flex align-items-center gap-2">
+                  <img src={logo} alt="Logo" className="footer__logo-image" /> {/* Dodaj logo ovde */}
                   <span>
                     Rent Car <br /> Service
                   </span>
@@ -73,9 +71,7 @@ const Footer = () => {
               <h5 className="footer__link-title mb-4">Head Office</h5>
               <p className="office__info">123 Podgorica, Crna Gora</p>
               <p className="office__info">Phone: +3826978946</p>
-
               <p className="office__info">Email: CarGo@gmail.com</p>
-
               <p className="office__info">Office Time: 10am - 7pm</p>
             </div>
           </Col>
@@ -83,11 +79,11 @@ const Footer = () => {
           <Col lg="3" md="4" sm="12">
             <div className="mb-4">
               <h5 className="footer__link-title">Newsletter</h5>
-              <p className="section__description">Subscribe our newsletter</p>
+              <p className="section__description">Subscribe to our newsletter</p>
               <div className="newsletter">
                 <input type="email" placeholder="Email" />
                 <span>
-                  <i class="ri-send-plane-line"></i>
+                  <i className="ri-send-plane-line"></i>
                 </span>
               </div>
             </div>
@@ -96,7 +92,7 @@ const Footer = () => {
           <Col lg="12">
             <div className="footer__bottom">
               <p className="section__description d-flex align-items-center justify-content-center gap-1 pt-4">
-                <i class="ri-copyright-line"></i>Copyright {year}. All rights reserved.
+                <i className="ri-copyright-line"></i>Copyright {year}. All rights reserved.
               </p>
             </div>
           </Col>

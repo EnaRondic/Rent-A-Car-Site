@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import ava01 from "../../assets/all-images/ava-1.jpg";
+import ava01 from "../../assets/all-images/avatar1.jpg";
 import ava02 from "../../assets/all-images/ava-2.jpg";
 import ava03 from "../../assets/all-images/ava-3.jpg";
 import ava04 from "../../assets/all-images/ava-4.jpg";
@@ -67,7 +67,7 @@ const Testimonial = () => {
             <img src={ava02} className="w-25 h-25 rounded-2"/>
 
             <div>
-                <h6 className="mb-0 mt-3">Person 1</h6>
+                <h6 className="mb-0 mt-3">Person 2</h6>
                 <p className="section__description">Customer</p>
             </div>
         </div>
@@ -84,7 +84,7 @@ const Testimonial = () => {
             <img src={ava03} className="w-25 h-25 rounded-2"/>
 
             <div>
-                <h6 className="mb-0 mt-3">Person 1</h6>
+                <h6 className="mb-0 mt-3">Person 3</h6>
                 <p className="section__description">Customer</p>
             </div>
         </div>
@@ -101,7 +101,7 @@ const Testimonial = () => {
             <img src={ava04} className="w-25 h-25 rounded-2"/>
 
             <div>
-                <h6 className="mb-0 mt-3">Person 1</h6>
+                <h6 className="mb-0 mt-3">Person 4</h6>
                 <p className="section__description">Customer</p>
             </div>
         </div>

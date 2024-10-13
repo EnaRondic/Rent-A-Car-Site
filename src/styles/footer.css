@@ -9,6 +9,13 @@
   font-weight: 400;
 }
 
+.footer__logo-image {
+  width: 100px; 
+  height: auto;
+  margin-right: 10px; 
+}
+
+
 .footer__logo span {
   color: #fff;
   font-weight: 500;

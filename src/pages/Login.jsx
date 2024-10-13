@@ -14,24 +14,28 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios(  {
+      const response = await axios({
         method: "POST",
-        url: `http://localhost:8000/api/login`,
+        url: `http://{{tim4.cortexakademija.com}}/api/register`,
         headers: {},
         data: {
-               "email": email,
-               "password": password,
-         },
+          "email": email,
+          "password": password,
+        },
       });
 
       if (response.status === 200) {
         const data = response.data;
         localStorage.setItem('authToken', data.access_token);
         setErrorMessage('');
-        navigate('/home'); 
+        navigate('/home'); // Redirect to home page on successful login
       }
     } catch (error) {
-      setErrorMessage('Invalid email or password. Please try again.');
+      if (error.response && error.response.data && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage('Invalid email or password. Please try again.');
+      }
     }
   };
 
