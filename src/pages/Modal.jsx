@@ -2,6 +2,10 @@ import React from 'react';
 import '../styles/modal.css';
 
 const Modal = ({ formData, onClose }) => {
+  if (!formData) {
+    return null; 
+  }
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
