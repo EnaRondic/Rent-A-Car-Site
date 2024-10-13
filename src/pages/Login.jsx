@@ -16,9 +16,7 @@ function Login() {
     try {
       const response = await axios({
         method: "POST",
-
-        url: `http://{{tim4.cortexakademija.com}}/api/register`,
-
+        url: `http://tim4.cortexakademija.com/api/login`,
         headers: {},
         data: {
           "email": email,
@@ -33,16 +31,10 @@ function Login() {
         localStorage.setItem('userId', data.user.id);
 
         setErrorMessage('');
-
         navigate('/home');
-
       }
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.message) {
-        setErrorMessage(error.response.data.message);
-      } else {
-        setErrorMessage('Invalid email or password. Please try again.');
-      }
+      setErrorMessage('Invalid email or password. Please try again.');
     }
   };
 

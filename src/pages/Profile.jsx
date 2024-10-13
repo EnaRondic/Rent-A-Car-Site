@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Spinner } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import '../styles/profile.css'
+import '../styles/profile.css';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -13,18 +13,17 @@ const Profile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    const userId = localStorage.getItem("userId");
 
-    if (!token || !userId) {
+    if (!token) {
       setError("User not authenticated");
       setLoading(false);
-      navigate("/login"); 
+      navigate("/login");
       return;
     }
 
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`http://tim4.cortexakademija.com/api/users/${userId}`, {
+        const response = await fetch("http://tim4.cortexakademija.com/api/user", {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -33,7 +32,7 @@ const Profile = () => {
         if (!response.ok) throw new Error('Failed to fetch profile data');
         const data = await response.json();
         setUser(data);
-        setFormData({ name: data.name, email: data.email, phone: data.phone }); 
+        setFormData({ name: data.name, email: data.email, phone: data.phone });
       } catch (error) {
         setError(error.message);
       } finally {
@@ -56,27 +55,26 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("authToken");
-    const userId = localStorage.getItem("userId");
-  
+    
     try {
-      const response = await fetch(`http://tim4.cortexakademija.com/api/users/${userId}`, {
+      const response = await fetch("http://tim4.cortexakademija.com/api/user", {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), 
+        body: JSON.stringify(formData),
       });
-  
+
       if (!response.ok) throw new Error('Failed to update profile');
       const data = await response.json();
-      setUser(data); 
-      setEditing(false); 
+      setUser(data);
+      setEditing(false);
     } catch (error) {
       setError(error.message);
     }
   };
-  
+
   if (loading) {
     return (
       <Container className="profile-container">

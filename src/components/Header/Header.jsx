@@ -25,24 +25,33 @@ const Header = () => {
   // Fetch user data when the component mounts
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    const userId = localStorage.getItem("userId"); // Fetch the user ID from localStorage
 
-    if (token && userId) {
+    if (token) {
       const fetchUserProfile = async () => {
+        const token = localStorage.getItem("authToken");
+      
+        if (!token) {
+          console.log("No token found!");
+          return;
+        }
+      
         try {
-          const response = await fetch(`http://tim4.cortexakademija.com/api/users/${userId}`, {
+          const response = await fetch(`http://tim4.cortexakademija.com/api/user`, {
+            method: 'GET',
             headers: {
-              'Authorization': `Bearer ${token}`,
+              'Authorization': `Bearer ${token}`,  // Koristi Bearer token u headeru
+              'Content-Type': 'application/json',
             },
           });
-
+      
           if (!response.ok) throw new Error('Failed to fetch profile data');
           const data = await response.json();
-          setUser(data); // Save user data in state
+          setUser(data); // Spasi korisničke podatke u state
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
       };
+      
 
       fetchUserProfile();
     }
