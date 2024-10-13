@@ -1,0 +1,70 @@
+
+.comments-section {
+    margin-top: 2rem;
+  }
+  
+  .comment {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .comment-rating {
+    display: flex;
+    align-items: center;
+  }
+  
+  .star-rating {
+    margin-left: 0.5rem;
+  }
+  
+  .comment-text {
+    margin: 0.5rem 0;
+  }
+  
+  .comment-date {
+    font-size: 0.9rem;
+    color: #999;
+  }
+  
+  .delete-button {
+    background-color: transparent;
+    color: #f00;
+    border: none;
+    cursor: pointer;
+    margin-top: 0.5rem; 
+  }
+  
+  .submit-button {
+    color: white;
+    border: none;
+    padding: 0.3rem 0.7rem; 
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 30% !important;
+    margin-top: 10px; 
+  }
+  
+  .comment-textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 0.5rem; 
+    resize: none; 
+  }
+  
+  
+  .star-rating i {
+    cursor: pointer;
+    font-size: 1.5rem; 
+    color: #f9a826; 
+  }
+  
+  .star-rating i.ri-star-line {
+    color: #ccc; 
+  }
+  

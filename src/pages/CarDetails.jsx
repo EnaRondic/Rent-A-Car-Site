@@ -6,6 +6,7 @@ import BookingForm from "../components/UI/BookingForm";
 import Modal from "./Modal";
 import { useParams } from "react-router-dom"; 
 import Swal from 'sweetalert2';
+import '../styles/rating.css';
 
 const CarDetails = () => {
   const { slug } = useParams();
@@ -33,7 +34,6 @@ const CarDetails = () => {
   const [rating, setRating] = useState(0);
   const [commentText, setCommentText] = useState('');
 
-  // State for average rating and total ratings
   const [averageRating, setAverageRating] = useState(singleCarItem.rating);
   const [totalRatings, setTotalRatings] = useState(singleCarItem.totalRatings || 0);
 
@@ -42,8 +42,6 @@ const CarDetails = () => {
     const storedComments = JSON.parse(localStorage.getItem('comments')) || [];
     const filteredComments = storedComments.filter(comment => comment.carName === slug);
     setComments(filteredComments);
-    
-    // Update average rating and total ratings
     updateRatingData(filteredComments);
   }, [singleCarItem]);
 
@@ -100,7 +98,7 @@ const CarDetails = () => {
     setCommentText('');
     setRating(0);
 
-    updateRatingData(updatedComments); // Update rating data
+    updateRatingData(updatedComments);
 
     Swal.fire({
       title: 'Thank you!',
@@ -114,8 +112,7 @@ const CarDetails = () => {
     const updatedComments = comments.filter((_, i) => i !== index);
     localStorage.setItem('comments', JSON.stringify(updatedComments));
     setComments(updatedComments);
-
-    updateRatingData(updatedComments); // Update rating data after deletion
+    updateRatingData(updatedComments); 
 
     Swal.fire({
       title: 'Deleted!',
@@ -207,7 +204,7 @@ const CarDetails = () => {
                 <form onSubmit={handleCommentSubmit}>
                   <div>
                     <label>Rating:</label>
-                    <div style={{ display: 'flex', cursor: 'pointer' }}>
+                    <div className="star-rating" style={{ display: 'flex', cursor: 'pointer' }}>
                       {[1, 2, 3, 4, 5].map((star, index) => (
                         <span key={index} onClick={() => handleStarClick(index)}>
                           {index < rating ? (
@@ -221,22 +218,23 @@ const CarDetails = () => {
                   </div>
                   <div>
                     <textarea 
+                      className="comment-textarea" 
                       rows="4" 
                       placeholder="Write your comment..." 
                       value={commentText} 
                       onChange={(e) => setCommentText(e.target.value)}
                     />
                   </div>
-                  <button type="submit">Submit</button>
+                  <button className="submit-button" type="submit">Submit</button>
                 </form>
 
                 <h5 className="mt-5">User Comments</h5>
                 {comments.length > 0 ? (
                   comments.map((comment, index) => (
                     <div key={index} className="comment">
-                      <div>
+                      <div className="comment-rating">
                         <strong>Rating:</strong>
-                        <div style={{ display: 'flex' }}>
+                        <div className="star-rating">
                           {[1, 2, 3, 4, 5].map((star, starIndex) => (
                             <span key={starIndex}>
                               {starIndex < comment.rating ? (
@@ -248,9 +246,9 @@ const CarDetails = () => {
                           ))}
                         </div>
                       </div>
-                      <p>{comment.text}</p>
-                      <small>{comment.date}</small>
-                      <button onClick={() => handleCommentDelete(index)}>Delete</button>
+                      <p className="comment-text">{comment.text}</p>
+                      <small className="comment-date">{comment.date}</small>
+                      <button className="delete-button" onClick={() => handleCommentDelete(index)}>Delete</button>
                       <hr />
                     </div>
                   ))
