@@ -16,7 +16,9 @@ function Login() {
     try {
       const response = await axios({
         method: "POST",
+
         url: `http://{{tim4.cortexakademija.com}}/api/register`,
+
         headers: {},
         data: {
           "email": email,
@@ -26,9 +28,14 @@ function Login() {
 
       if (response.status === 200) {
         const data = response.data;
+        
         localStorage.setItem('authToken', data.access_token);
+        localStorage.setItem('userId', data.user.id);
+
         setErrorMessage('');
-        navigate('/home'); // Redirect to home page on successful login
+
+        navigate('/home');
+
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
@@ -73,7 +80,7 @@ function Login() {
             <p className="error-message">{errorMessage}</p>
           )}
 
-          <button type="submit" className="submit-button">Log in</button>
+          <button type="submit" className="submit-buttonn">Log in</button>
 
           <div className="register-link">
             <p>

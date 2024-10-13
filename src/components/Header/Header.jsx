@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import "../../styles/header.css";
-import logo from "../../assets/all-images/logo.png"; // Uvezi svoj logo
+import logo from "../../assets/all-images/logo.png";
 
 const navLinks = [
   { path: "/home", display: "Home" },
@@ -12,16 +12,48 @@ const navLinks = [
   { path: "/blogs", display: "Blog" },
   { path: "/contact", display: "Contact" },
   { path: "/termspage", display: "Terms" },
+  { path: "/my-reservations", display: "My reservations" },
+  { path: "/kanban", display: "Kanban" },
 ];
 
 const Header = () => {
   const menuRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null); // User state to manage user information
   const navigate = useNavigate();
+
+  // Fetch user data when the component mounts
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    const userId = localStorage.getItem("userId"); // Fetch the user ID from localStorage
+
+    if (token && userId) {
+      const fetchUserProfile = async () => {
+        try {
+          const response = await fetch(`http://tim4.cortexakademija.com/api/users/${userId}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+
+          if (!response.ok) throw new Error('Failed to fetch profile data');
+          const data = await response.json();
+          setUser(data); // Save user data in state
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+
+      fetchUserProfile();
+    }
+  }, []);
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
   const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userId");
+    setUser(null);
     navigate("/login");
   };
 
@@ -46,37 +78,36 @@ const Header = () => {
 
             <Col lg="6" md="6" sm="6">
               <div className="header__top__right">
-                <Link to="/login" className="d-flex align-items-center gap-1">
-                  <i className="ri-login-circle-line"></i> Login
-                </Link>
+                {/* Show Login/Register if user is not logged in */}
+                {!user ? (
+                  <>
+                    <Link to="/login" className="d-flex align-items-center gap-1">
+                      <i className="ri-login-circle-line"></i> Login
+                    </Link>
 
-                <Link
-                  to="/register"
-                  className="d-flex align-items-center gap-1"
-                >
-                  <i className="ri-user-line"></i> Register
-                </Link>
-
-                <div className="user-icon" onClick={toggleDropdown}>
-                  <FaUserCircle size={24} />
-                  {dropdownOpen && (
-                    <div
-                      className={`dropdown-menu ${
-                        dropdownOpen ? "active" : ""
-                      }`}
-                    >
-                      <Link to="/profile">View Profile</Link>
-                      <button onClick={handleLogout}>Logout</button>
-                    </div>
-                  )}
-                </div>
+                    <Link to="/register" className="d-flex align-items-center gap-1">
+                      <i className="ri-user-line"></i> Register
+                    </Link>
+                  </>
+                ) : (
+                  <div className="user-icon" onClick={toggleDropdown}>
+                    <FaUserCircle size={24} />
+                    <span className="user-name">{user.name}</span>
+                    {dropdownOpen && (
+                      <div className={`dropdown-menu ${dropdownOpen ? "active" : ""}`}>
+                        <Link to="/profile">View Profile</Link>
+                        <button onClick={handleLogout}>Logout</button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </Col>
           </Row>
         </Container>
       </div>
 
-      {/* middle header */}
+      {/* Middle header */}
       <div className="header__middle">
         <Container>
           <Row>
@@ -85,9 +116,7 @@ const Header = () => {
                 <h1>
                   <Link to="/home" className="d-flex align-items-center gap-1">
                     <img src={logo} alt="Logo" className="logo-image" />
-                    <span className="logo-text">
-                      Rent a Car <br /> Go
-                    </span>
+                    <span className="logo-text">Rent a Car <br /> Go</span>
                   </Link>
                 </h1>
               </div>
@@ -117,12 +146,7 @@ const Header = () => {
               </div>
             </Col>
 
-            <Col
-              lg="2"
-              md="3"
-              sm="0"
-              className="d-flex align-items-center justify-content-end"
-            >
+            <Col lg="2" md="3" sm="0" className="d-flex align-items-center justify-content-end">
               <button className="header__btn btn">
                 <Link to="/contact">
                   <i className="ri-phone-line"></i> Request a call
@@ -133,7 +157,7 @@ const Header = () => {
         </Container>
       </div>
 
-      {/* main navigation */}
+      {/* Main navbar */}
       <div className="main__navbar">
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
@@ -146,9 +170,7 @@ const Header = () => {
                 {navLinks.map((item, index) => (
                   <NavLink
                     to={item.path}
-                    className={(navClass) =>
-                      navClass.isActive ? "nav__active nav__item" : "nav__item"
-                    }
+                    className={(navClass) => navClass.isActive ? "nav__active nav__item" : "nav__item"}
                     key={index}
                   >
                     {item.display}

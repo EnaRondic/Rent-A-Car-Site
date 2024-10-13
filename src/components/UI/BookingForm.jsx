@@ -1,65 +1,154 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../styles/booking-form.css';
 import { Form, FormGroup } from 'reactstrap';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import Modal from '../../pages/Modal';
+import Swal from 'sweetalert2';
 
-const BookingForm = () => {
+const BookingForm = ({ formData, setFormData, setMyReservations, carImage }) => {
+    const [showModal, setShowModal] = useState(false);
+    const [reservationDetails, setReservationDetails] = useState(null);
 
-    const submitHandler = event => {
-        event.preventDefault();
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
-  return <Form onSubmit={submitHandler}>
-    <FormGroup className='booking__form d-inline-block me-4 mb-4'>
-        <input type="text" placeholder='First Name'/>
-    </FormGroup>
-    <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
-        <input type="text" placeholder='Last Name'/>
-    </FormGroup>
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
 
-    <FormGroup className='booking__form d-inline-block me-4 mb-4'>
-        <input type="email" placeholder='Email'/>
-    </FormGroup>
-    <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
-        <input type="number" placeholder='Phone Number'/>
-    </FormGroup>
+        if (formData.journeyDate) {
+            const now = new Date();
+            const journeyDateTime = new Date(formData.journeyDate);
+            journeyDateTime.setHours(formData.journeyTime.split(':')[0], formData.journeyTime.split(':')[1]);
 
-    <FormGroup className='booking__form d-inline-block me-4 mb-4'>
-        <input type="text" placeholder='From Address'/>
-    </FormGroup>
-    <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
-        <input type="text" placeholder='To Address'/>
-    </FormGroup>
+            const timeDifference = journeyDateTime - now;
 
-    <FormGroup className='booking__form d-inline-block me-4 mb-4'>
-      <select name="" id="">
-        <option value="1 person">1 Person</option>
-        <option value="2 person">2 Person</option>
-        <option value="3 person">3 Person</option>
-        <option value="4 person">4 Person</option>
-        <option value="5 person">5+ Person</option>
-      </select>
-    </FormGroup>
-    <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
-      <select name="" id="">
-        <option value="1 luggage">1 Luggage</option>
-        <option value="2 luggage">2 Luggage</option>
-        <option value="3 luggage">3 Luggage</option>
-        <option value="4 luggage">4 Luggage</option>
-        <option value="5 luggage">5+ Luggage</option>
-      </select>
-    </FormGroup>
+            if (timeDifference <= 25 * 60 * 60 * 1000) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Booking Error',
+                    text: 'You cannot book a car less than 24 hours in advance. You must book at least 25 hours ahead.',
+                });
+                return;
+            }
+        }
 
-    <FormGroup className='booking__form d-inline-block me-4 mb-4'>
-        <input type="date" placeholder='Journey Date'/>
-    </FormGroup>
-    <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
-        <input type="time" placeholder='Journey Time' className='time__picker'/>
-    </FormGroup>
+        const newReservation = {
+            ...formData,
+            imgUrl: carImage,
+            journeyDateTime: new Date(`${formData.journeyDate.toISOString().split('T')[0]}T${formData.journeyTime}`),
+        };
 
-    <FormGroup >
-        <textarea rows={5} type='textarea' className='textarea' placeholder='Write'></textarea>
-    </FormGroup>
-  </Form>
-}
+        const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+        storedReservations.push(newReservation);
+        localStorage.setItem('reservations', JSON.stringify(storedReservations));
 
-export default BookingForm
+        setReservationDetails(newReservation);
+        setShowModal(true);
+
+        setFormData({
+            name: '',
+            email: '',
+            address: '',
+            numOfPersons: '',
+            numOfLuggage: '',
+            journeyDate: null,
+            journeyTime: '',
+        });
+
+        setMyReservations(storedReservations);
+    };
+
+    return (
+        <>
+            <Form onSubmit={handleFormSubmit}>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
+                    <input 
+                        type="text" 
+                        name="name" 
+                        value={formData.name} 
+                        onChange={handleChange} 
+                        placeholder='Name' 
+                        required 
+                    />
+                </FormGroup>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        value={formData.email} 
+                        onChange={handleChange} 
+                        placeholder='Email' 
+                        required 
+                    />
+                </FormGroup>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
+                    <input 
+                        type="text" 
+                        name="address" 
+                        value={formData.address} 
+                        onChange={handleChange} 
+                        placeholder='Address' 
+                        required 
+                    />
+                </FormGroup>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
+                    <select 
+                        name="numOfPersons" 
+                        value={formData.numOfPersons} 
+                        onChange={handleChange} 
+                        required
+                    >
+                        <option value="" disabled>Select Number of People</option>
+                        {[1, 2, 3, 4, 5].map((num) => (
+                            <option key={num} value={num}>{num}</option>
+                        ))}
+                    </select>
+                </FormGroup>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
+                    <select 
+                        name="numOfLuggage" 
+                        value={formData.numOfLuggage} 
+                        onChange={handleChange} 
+                        required
+                    >
+                        <option value="" disabled>Select Number of Luggage</option>
+                        {[0, 1, 2, 3, 4].map((num) => (
+                            <option key={num} value={num}>{num}</option>
+                        ))}
+                    </select>
+                </FormGroup>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
+                    <DatePicker 
+                        selected={formData.journeyDate} 
+                        onChange={(date) => setFormData({ ...formData, journeyDate: date })} 
+                        placeholderText='Journey Date' 
+                        required 
+                    />
+                </FormGroup>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
+                    <input 
+                        type="time" 
+                        name="journeyTime" 
+                        value={formData.journeyTime} 
+                        onChange={handleChange} 
+                        placeholder='Journey Time' 
+                        required 
+                    />
+                </FormGroup>
+                <button type="submit" className='btn btn-primary'>Reserve Now</button>
+            </Form>
+
+            {showModal && (
+                <Modal 
+                    formData={reservationDetails} 
+                    onClose={() => setShowModal(false)} 
+                />
+            )}
+        </>
+    );
+};
+
+export default BookingForm;
