@@ -4,7 +4,7 @@ import { Form, FormGroup } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Modal from '../../pages/Modal';
-import Swal from 'sweetalert2'; 
+import Swal from 'sweetalert2';
 
 const BookingForm = ({ formData, setFormData, setMyReservations, carImage }) => {
     const [showModal, setShowModal] = useState(false);
@@ -38,7 +38,7 @@ const BookingForm = ({ formData, setFormData, setMyReservations, carImage }) => 
         const newReservation = {
             ...formData,
             imgUrl: carImage,
-            journeyDateTime: new Date(`${formData.journeyDate.toISOString().split('T')[0]}T${formData.journeyTime}`), // Combine date and time
+            journeyDateTime: new Date(`${formData.journeyDate.toISOString().split('T')[0]}T${formData.journeyTime}`),
         };
 
         const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
@@ -49,12 +49,9 @@ const BookingForm = ({ formData, setFormData, setMyReservations, carImage }) => 
         setShowModal(true);
 
         setFormData({
-            firstName: '',
-            lastName: '',
+            name: '',
             email: '',
-            phone: '',
-            fromAddress: '',
-            toAddress: '',
+            address: '',
             numOfPersons: '',
             numOfLuggage: '',
             journeyDate: null,
@@ -70,20 +67,10 @@ const BookingForm = ({ formData, setFormData, setMyReservations, carImage }) => 
                 <FormGroup className='booking__form d-inline-block me-4 mb-4'>
                     <input 
                         type="text" 
-                        name="firstName" 
-                        value={formData.firstName} 
+                        name="name" 
+                        value={formData.name} 
                         onChange={handleChange} 
-                        placeholder='First Name' 
-                        required 
-                    />
-                </FormGroup>
-                <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
-                    <input 
-                        type="text" 
-                        name="lastName" 
-                        value={formData.lastName} 
-                        onChange={handleChange} 
-                        placeholder='Last Name' 
+                        placeholder='Name' 
                         required 
                     />
                 </FormGroup>
@@ -97,55 +84,41 @@ const BookingForm = ({ formData, setFormData, setMyReservations, carImage }) => 
                         required 
                     />
                 </FormGroup>
-                <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
                     <input 
-                        type="tel" 
-                        name="phone" 
-                        value={formData.phone} 
+                        type="text" 
+                        name="address" 
+                        value={formData.address} 
                         onChange={handleChange} 
-                        placeholder='Phone Number' 
+                        placeholder='Address' 
                         required 
                     />
                 </FormGroup>
                 <FormGroup className='booking__form d-inline-block me-4 mb-4'>
-                    <input 
-                        type="text" 
-                        name="fromAddress" 
-                        value={formData.fromAddress} 
-                        onChange={handleChange} 
-                        placeholder='From Address' 
-                        required 
-                    />
-                </FormGroup>
-                <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
-                    <input 
-                        type="text" 
-                        name="toAddress" 
-                        value={formData.toAddress} 
-                        onChange={handleChange} 
-                        placeholder='To Address' 
-                        required 
-                    />
-                </FormGroup>
-                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
-                    <input 
-                        type="number" 
+                    <select 
                         name="numOfPersons" 
                         value={formData.numOfPersons} 
                         onChange={handleChange} 
-                        placeholder='Number of Persons' 
-                        required 
-                    />
+                        required
+                    >
+                        <option value="" disabled>Select Number of People</option>
+                        {[1, 2, 3, 4, 5].map((num) => (
+                            <option key={num} value={num}>{num}</option>
+                        ))}
+                    </select>
                 </FormGroup>
-                <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
-                    <input 
-                        type="number" 
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
+                    <select 
                         name="numOfLuggage" 
                         value={formData.numOfLuggage} 
                         onChange={handleChange} 
-                        placeholder='Number of Luggage' 
-                        required 
-                    />
+                        required
+                    >
+                        <option value="" disabled>Select Number of Luggage</option>
+                        {[0, 1, 2, 3, 4].map((num) => (
+                            <option key={num} value={num}>{num}</option>
+                        ))}
+                    </select>
                 </FormGroup>
                 <FormGroup className='booking__form d-inline-block me-4 mb-4'>
                     <DatePicker 
@@ -155,7 +128,7 @@ const BookingForm = ({ formData, setFormData, setMyReservations, carImage }) => 
                         required 
                     />
                 </FormGroup>
-                <FormGroup className='booking__form d-inline-block ms-1 mb-4'>
+                <FormGroup className='booking__form d-inline-block me-4 mb-4'>
                     <input 
                         type="time" 
                         name="journeyTime" 

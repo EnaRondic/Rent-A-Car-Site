@@ -13,12 +13,9 @@ const CarDetails = () => {
   const singleCarItem = carData.find((item) => item.carName === slug);
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
-    phone: '',
-    fromAddress: '',
-    toAddress: '',
+    address: '',  
     numOfPersons: '',
     numOfLuggage: '',
     journeyDate: null,  

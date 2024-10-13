@@ -60,13 +60,11 @@ const MyReservations = () => {
                             <h3 className="reservation-title">{reservation.carName}</h3>
                             <div className="reservation-details-container">
                                 <div className="details-column">
-                                    <p>Name: {reservation.firstName} {reservation.lastName}</p>
+                                    <p>Name: {reservation.name}</p>
                                     <p>Email: {reservation.email}</p>
-                                    <p>Phone: {reservation.phone}</p>
                                 </div>
                                 <div className="details-column">
-                                    <p>From: {reservation.fromAddress}</p>
-                                    <p>To: {reservation.toAddress}</p>
+                                    <p>Address: {reservation.address}</p>
                                     <p>Number of Persons: {reservation.numOfPersons}</p>
                                     <p>Number of Luggage: {reservation.numOfLuggage}</p>
                                     <p>Date: {new Date(reservation.journeyDateTime).toLocaleString()}</p>
