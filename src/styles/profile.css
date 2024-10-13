@@ -1,0 +1,86 @@
+.profile-container {
+    margin-bottom: 20px;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .profile-container h1 {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .profile-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  
+  .profile-error {
+    color: red;
+    text-align: center;
+  }
+  
+  .profile-info, .edit-profile {
+    padding: 15px;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    background-color: #f0f8ff; 
+    max-width: 500px; 
+    margin: 20px auto 0; 
+  }
+  
+  .profile-info h2, .edit-profile h2 {
+    margin-bottom: 15px;
+    color: #007bff;
+    text-align: center;
+  }
+  
+  .profile-info p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+
+  .edit-profile input {
+    width: calc(100% - 20px); 
+    max-width: 350px; 
+    padding: 10px;
+    margin-bottom: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .edit-profile button, .edit-button {
+    padding: 10px 20px;
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 16px; 
+    margin-top: 30px;
+  }
+  
+  .edit-button {
+    background-color: #00bfff; 
+    margin-top: 20px;
+
+  }
+  
+  .edit-button:hover {
+    background-color: #009dff; 
+    transform: scale(1.05); 
+  }
+  
+  .edit-profile button:hover {
+    background-color: #218838; 
+    transform: scale(1.05); 
+  }
+  
+  .edit-profile button:focus {
+    outline: none;
+  }
+  
