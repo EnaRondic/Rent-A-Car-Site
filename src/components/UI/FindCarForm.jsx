@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css"; 
 import "../../styles/find-car-form.css";
@@ -8,6 +9,9 @@ const FindCarForm = () => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [notification, setNotification] = useState("");
+  
+  const navigate = useNavigate(); 
 
   const formatDates = () => {
     if (startDate && endDate) {
@@ -29,13 +33,38 @@ const FindCarForm = () => {
   const handleDateChange = (dates) => {
     const [start, end] = dates;
 
-   
     if (start && !end) {
       setStartDate(start);
+      setEndDate(null); 
     } else if (start && end) {
       setStartDate(start);
       setEndDate(end);
       setModalOpen(false);
+
+      const currentDate = new Date();
+      const minReservationDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+
+      if (start < minReservationDate) {
+        setNotification("Reservations can be made at least 24 hours in advance to give the rent-a-car company enough time to prepare the vehicle.");
+      } else {
+        setNotification("");
+      }
+    }
+  };
+
+  const isReservationValid = () => {
+    if (startDate && endDate) {
+      const currentDate = new Date();
+      const minReservationDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000); 
+      return startDate >= minReservationDate; 
+    }
+    return false;
+  };
+
+  const handleFindCarClick = (e) => {
+    e.preventDefault(); 
+    if (isReservationValid()) {
+      navigate("/cars"); 
     }
   };
 
@@ -70,9 +99,13 @@ const FindCarForm = () => {
         </FormGroup>
 
         <FormGroup className="form__group">
-          <button className="btn find__car-btn">Find Car</button>
+          <button className="btn find__car-btn" onClick={handleFindCarClick} disabled={!isReservationValid()}>
+            Find Car
+          </button>
         </FormGroup>
       </div>
+
+      {notification && <div className="alert alert-warning">{notification}</div>} 
 
       <Modal isOpen={modalOpen} toggle={() => setModalOpen(false)}>
         <ModalHeader toggle={() => setModalOpen(false)}>Izaberi datume</ModalHeader>

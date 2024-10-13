@@ -1,18 +1,19 @@
-import React from "react";
-import { Col } from "reactstrap";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+import React, { useState } from "react";
+import { Col, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { useNavigate } from "react-router-dom"; 
 import '../../styles/car-item.css';
 
 const CarItem = (props) => {
-  const { imgUrl, model, carName, automatic, speed, price } = props.item;
-  const navigate = useNavigate(); // Use useNavigate to get the navigation function
+  const { imgUrl, model, carName, automatic, speed, price, brand, year, fuelType, seatType, gps, description } = props.item;
+  const navigate = useNavigate(); 
+  const [modalOpen, setModalOpen] = useState(false); 
 
   const handleRentClick = () => {
-    navigate(`/cars/${carName}`); // Navigate to the Rent page
+    navigate(`/cars/${carName}`); 
   };
 
-  const handleDetailsClick = () => {
-    navigate(`/cars/${carName}`); // Navigate to the Details page
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
   };
 
   return (
@@ -45,12 +46,32 @@ const CarItem = (props) => {
           <button className="w-50 car__item-btn car__btn-rent" onClick={handleRentClick}>
             Rent
           </button>
-
-          <button className="w-50 car__item-btn car__btn-details" onClick={handleDetailsClick}>
+          <button className="w-50 car__item-btn car__btn-details" onClick={toggleModal}>
             Details
           </button>
         </div>
       </div>
+
+      {/* Modal for details */}
+      <Modal isOpen={modalOpen} toggle={toggleModal}>
+        <ModalHeader toggle={toggleModal}>{carName} Details</ModalHeader>
+        <ModalBody>
+          <img src={imgUrl} alt={carName} className="w-100 mb-3" />
+          <h5>Brand: {brand}</h5>
+          <p><strong>Year:</strong> {year}</p>
+          <p><strong>Fuel Type:</strong> {fuelType}</p>
+          <p><strong>Price:</strong> ${price}/day</p>
+          <p><strong>Speed:</strong> {speed}</p>
+          <p><strong>Automatic:</strong> {automatic}</p>
+          <p><strong>GPS:</strong> {gps}</p>
+          <p><strong>Seats:</strong> {seatType}</p>
+          <p>{description}</p>
+        </ModalBody>
+        <ModalFooter>
+          <button className="btn btn-secondary" onClick={toggleModal}>Close</button>
+          <button className="btn btn-primary" onClick={handleRentClick}>Rent</button>
+        </ModalFooter>
+      </Modal>
     </Col>
   );
 };
