@@ -7,7 +7,6 @@ const MyReservations = () => {
 
     useEffect(() => {
         const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-        console.log(storedReservations);
         setReservations(storedReservations);
     }, []);
 
@@ -17,7 +16,7 @@ const MyReservations = () => {
         const localReservationDateTime = new Date(reservationDateTime.getTime() - reservationDateTime.getTimezoneOffset() * 60000);
         
         const timeDifference = localReservationDateTime - now;
-        return timeDifference > 48 * 60 * 60 * 1000;
+        return timeDifference > 48 * 60 * 60 * 1000; 
     };
 
     const handleCancel = (index) => {
@@ -55,6 +54,7 @@ const MyReservations = () => {
             ) : (
                 reservations.map((reservation, index) => (
                     <div className="reservation-card" key={index}>
+                       
                         <img src={reservation.imgUrl} alt={reservation.carName} className="reservation-image" title={reservation.carName} />
                         <div className="reservation-info">
                             <h3 className="reservation-title">{reservation.carName}</h3>
