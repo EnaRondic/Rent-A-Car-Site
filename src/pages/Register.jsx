@@ -24,7 +24,7 @@ const Register = () => {
     try {
       const response = await axios(  {
         method: "POST",
-        url: `http://localhost:8000/api/register`,
+        url: `http://tim4.cortexakademija.com/api/register`,
         headers: {},
         data: {
                "name": name,

@@ -14,21 +14,24 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios(  {
+      const response = await axios({
         method: "POST",
-        url: `http://localhost:8000/api/login`,
+        url: `http://tim4.cortexakademija.com/api/login`,
         headers: {},
         data: {
-               "email": email,
-               "password": password,
-         },
+          "email": email,
+          "password": password,
+        },
       });
 
       if (response.status === 200) {
         const data = response.data;
+        
         localStorage.setItem('authToken', data.access_token);
+        localStorage.setItem('userId', data.user.id);
+
         setErrorMessage('');
-        navigate('/home'); 
+        navigate('/home');
       }
     } catch (error) {
       setErrorMessage('Invalid email or password. Please try again.');

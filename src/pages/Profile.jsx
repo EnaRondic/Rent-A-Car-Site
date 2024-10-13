@@ -1,20 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Container, Spinner } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    const userId = localStorage.getItem("userId");
+
+    if (!token || !userId) {
+      setError("User not authenticated");
+      setLoading(false);
+      navigate("/login"); // Redirect to login if not authenticated
+      return;
+    }
+
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/login'); 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        const response = await fetch(`http://tim4.cortexakademija.com/api/users/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) throw new Error('Failed to fetch profile data');
         const data = await response.json();
-        setUser(data);
+        setUser(data); // Save user data in state
       } catch (error) {
         setError(error.message);
       } finally {
@@ -23,12 +38,14 @@ const Profile = () => {
     };
 
     fetchUserProfile();
-  }, []);
+  }, [navigate]);
 
   if (loading) {
     return (
       <Container>
-        <Spinner color="primary" />
+        <div className="loading">
+          <Spinner animation="border" role="status" />
+        </div>
       </Container>
     );
   }
@@ -36,18 +53,20 @@ const Profile = () => {
   if (error) {
     return (
       <Container>
-        <h2>Error: {error}</h2>
+        <div className="error">
+          <h3>Error: {error}</h3>
+        </div>
       </Container>
     );
   }
 
   return (
     <Container>
-      <h2>User Profile</h2>
+      <h1>User Profile</h1>
       <div className="profile-info">
-        <p><strong>Name:</strong> {user.name}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Phone:</strong> {user.phone}</p>
+        <p>Name: {user.name}</p>
+        <p>Email: {user.email}</p>
+        <p>Phone: {user.phone}</p>
       </div>
     </Container>
   );
