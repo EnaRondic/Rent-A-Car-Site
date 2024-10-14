@@ -7,6 +7,7 @@ import '../styles/login.css';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); 
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate(); 
 
@@ -58,14 +59,23 @@ function Login() {
 
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="form-input"
-            />
+            <div className="password-container">
+              <input
+                type={showPassword ? "text" : "password"} 
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="form-input"
+              />
+              <span
+                className="eye-icon"
+                onClick={() => setShowPassword(!showPassword)} 
+                style={{ cursor: 'pointer' }}
+              >
+                {showPassword ? '👁️' : '👁️‍🗨️'} 
+              </span>
+            </div>
           </div>
 
           {errorMessage && (
