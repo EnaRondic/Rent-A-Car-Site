@@ -17,7 +17,7 @@ function Login() {
     try {
       const response = await axios({
         method: "POST",
-        url: `http://tim4.cortexakademija.com/api/login`,
+        url: `https://backend.tim4.cortexakademija.com/api/login`,
         headers: {},
         data: {
           "email": email,

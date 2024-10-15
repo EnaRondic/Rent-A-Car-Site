@@ -36,7 +36,7 @@ const Header = () => {
         }
       
         try {
-          const response = await fetch(`http://tim4.cortexakademija.com/api/user`, {
+          const response = await fetch(`https://backend.tim4.cortexakademija.com/api/user`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,  // Koristi Bearer token u headeru

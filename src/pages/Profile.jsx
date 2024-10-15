@@ -23,7 +23,7 @@ const Profile = () => {
 
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch("http://tim4.cortexakademija.com/api/user", {
+        const response = await fetch("https://backend.tim4.cortexakademija.com/api/user", {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -57,7 +57,7 @@ const Profile = () => {
     const token = localStorage.getItem("authToken");
     
     try {
-      const response = await fetch("http://tim4.cortexakademija.com/api/user", {
+      const response = await fetch("https://backend.tim4.cortexakademija.com/api/user", {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
