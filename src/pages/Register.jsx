@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import backgroundImage from '../assets/all-images/background.jpg'; 
-import '../styles/login.css'; 
+import backgroundImage from '../assets/all-images/background.jpg';
+import '../styles/login.css';
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('Ena'); 
+  const [surname, setSurname] = useState('Rondic'); 
+  const [email, setEmail] = useState('test@gmail.com'); 
+  const [password, setPassword] = useState('password123'); 
+  const [confirmPassword, setConfirmPassword] = useState('password123'); 
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -21,25 +20,11 @@ const Register = () => {
       return;
     }
 
-    try {
-      const response = await axios(  {
-        method: "POST",
-        url: `https://backend.tim4.cortexakademija.com/api/register`,
-        headers: {},
-        data: {
-               "name": name,
-               "email": email,
-               "password": password,
-               "password_confirmation": confirmPassword,
-         },
-    });
-
-      if (response.status === 201) {
-        setErrorMessage('');
-        navigate('/login'); 
-      }
-    } catch (error) {
-      setErrorMessage(`Registration failed. ${error.errors}`);
+    if (email === "test@gmail.com" && password === "password123") {
+      setErrorMessage('');
+      navigate('/login');
+    } else {
+      setErrorMessage('Registracija nije uspjela. Provjerite vaše podatke.');
     }
   };
 
@@ -50,18 +35,26 @@ const Register = () => {
         <h2 className="login-title">Register</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">First Name</label>
             <input
               type="text"
               id="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
+              onChange={(e) => setName(e.target.value)} 
               className="form-input"
             />
           </div>
 
-          
+          <div className="form-group">
+            <label htmlFor="surname">Last Name</label>
+            <input
+              type="text"
+              id="surname"
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)} 
+              className="form-input"
+            />
+          </div>
 
           <div className="form-group">
             <label htmlFor="email">Email address</label>
@@ -69,8 +62,7 @@ const Register = () => {
               type="email"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              onChange={(e) => setEmail(e.target.value)} 
               className="form-input"
             />
           </div>
@@ -81,20 +73,18 @@ const Register = () => {
               type="password"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+              onChange={(e) => setPassword(e.target.value)} 
               className="form-input"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="confirm-password">Password confirmation</label>
+            <label htmlFor="confirm-password">Password Confirmation</label>
             <input
               type="password"
               id="confirm-password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
+              onChange={(e) => setConfirmPassword(e.target.value)} 
               className="form-input"
             />
           </div>
@@ -108,7 +98,7 @@ const Register = () => {
           <div className="login-link">
             <p>
               Already have an account?{' '}
-              <a href="/login">Sign Up</a>
+              <a href="/login">Sign In</a>
             </p>
           </div>
         </form>

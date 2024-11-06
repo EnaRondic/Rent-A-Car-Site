@@ -28,30 +28,22 @@ const Header = () => {
 
     if (token) {
       const fetchUserProfile = async () => {
-        const token = localStorage.getItem("authToken");
-      
-        if (!token) {
-          console.log("No token found!");
-          return;
-        }
-      
         try {
           const response = await fetch(`https://backend.tim4.cortexakademija.com/api/user`, {
             method: 'GET',
             headers: {
-              'Authorization': `Bearer ${token}`,  // Koristi Bearer token u headeru
+              'Authorization': `Bearer ${token}`,  // Use Bearer token in header
               'Content-Type': 'application/json',
             },
           });
-      
+
           if (!response.ok) throw new Error('Failed to fetch profile data');
           const data = await response.json();
-          setUser(data); // Spasi korisničke podatke u state
+          setUser(data); // Save user data in state
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
       };
-      
 
       fetchUserProfile();
     }
@@ -61,7 +53,6 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    localStorage.removeItem("userId");
     setUser(null);
     navigate("/login");
   };
@@ -87,7 +78,6 @@ const Header = () => {
 
             <Col lg="6" md="6" sm="6">
               <div className="header__top__right">
-                {/* Show Login/Register if user is not logged in */}
                 {!user ? (
                   <>
                     <Link to="/login" className="d-flex align-items-center gap-1">

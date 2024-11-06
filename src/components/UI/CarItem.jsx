@@ -46,6 +46,8 @@ const CarItem = (props) => {
           <button className="w-50 car__item-btn car__btn-rent" onClick={handleRentClick}>
             Rent
           </button>
+
+          
           <button className="w-50 car__item-btn car__btn-details" onClick={toggleModal}>
             Details
           </button>

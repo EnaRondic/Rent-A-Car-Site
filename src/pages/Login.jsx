@@ -1,40 +1,22 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/all-images/background.jpg';
 import '../styles/login.css';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('admin@example.com'); 
+  const [password, setPassword] = useState('admin'); 
   const [showPassword, setShowPassword] = useState(false); 
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate(); 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios({
-        method: "POST",
-        url: `https://backend.tim4.cortexakademija.com/api/login`,
-        headers: {},
-        data: {
-          "email": email,
-          "password": password,
-        },
-      });
-
-      if (response.status === 200) {
-        const data = response.data;
-        
-        localStorage.setItem('authToken', data.access_token);
-        localStorage.setItem('userId', data.user.id);
-
-        setErrorMessage('');
-        navigate('/home');
-      }
-    } catch (error) {
+    if (email === "admin@example.com" && password === "admin") {
+      setErrorMessage('');
+      navigate('/home');
+    } else {
       setErrorMessage('Invalid email or password. Please try again.');
     }
   };
@@ -51,8 +33,7 @@ function Login() {
               type="email"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              readOnly // Prevent user from changing the email
               className="form-input"
             />
           </div>
@@ -64,8 +45,7 @@ function Login() {
                 type={showPassword ? "text" : "password"} 
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                readOnly // Prevent user from changing the password
                 className="form-input"
               />
               <span
